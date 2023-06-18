@@ -13,11 +13,19 @@ namespace MarbleBall
 
         public Vector2 moveDir = Vector2.up;
 
+        private Rigidbody2D rigidbody;
+
+        private void Awake()
+        {
+            rigidbody = transform.GetComponent<Rigidbody2D>();
+        }
+
         protected void OnCollisionEnter2D(Collision2D collision)
         {
             if (collision.gameObject.tag != "Ball")
             {
-                moveDir = Vector2.Reflect(moveDir, collision.GetContact(0).normal);
+                Vector2 direction = Vector2.Reflect(moveDir, collision.GetContact(0).normal);
+                SetMoveDirection(direction);
             }
             
             if (collision.gameObject.tag == "Box")
@@ -28,14 +36,15 @@ namespace MarbleBall
             }
         }
 
-        private void Update()
+        void Move()
         {
-            transform.Translate(moveDir.normalized * moveSpeed * Time.deltaTime, Space.Self);
+            rigidbody.velocity = moveDir.normalized * moveSpeed;
         }
 
         public void SetMoveDirection(Vector2 direction)
         {
             moveDir = direction;
+            Move();
         }
 
         protected virtual void BallSkill()
