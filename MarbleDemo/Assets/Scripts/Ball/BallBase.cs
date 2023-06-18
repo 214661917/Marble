@@ -13,7 +13,7 @@ namespace MarbleBall
 
         public Vector2 moveDir = Vector2.up;
 
-        private void OnCollisionEnter2D(Collision2D collision)
+        protected void OnCollisionEnter2D(Collision2D collision)
         {
             if (collision.gameObject.tag != "Ball")
             {
@@ -24,6 +24,7 @@ namespace MarbleBall
             {
                 BoxBase box = collision.gameObject.GetComponent<BoxBase>();
                 box.Hurt(atk);
+                BallSkill();
             }
         }
 
@@ -35,6 +36,10 @@ namespace MarbleBall
         public void SetMoveDirection(Vector2 direction)
         {
             moveDir = direction;
+        }
+
+        protected virtual void BallSkill()
+        {
         }
     }
 }

@@ -16,7 +16,7 @@ namespace MarbleBall
 
         private void Awake()
         {
-            ballPrefab = Resources.Load<GameObject>("Prefabs/Ball");
+            ballPrefab = Resources.Load<GameObject>("Prefabs/BlastBall");
         }
 
         private void Start()
@@ -39,8 +39,6 @@ namespace MarbleBall
             GameObject obj = Instantiate(ballPrefab, muzzle.position, muzzle.rotation);
             BallBase ball= obj.GetComponent<BallBase>();
             ball.SetMoveDirection(direction);
-
-            ball.GetComponent<SpriteRenderer>().color = new Color(Random.Range(0, 255), Random.Range(0, 255), Random.Range(0, 255));
         }
     }
 }
