@@ -29,13 +29,18 @@ namespace MarbleBall
         {
             if (Input.GetMouseButtonDown(0))
             {
-                Shoot();
+                Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - muzzle.position;
+                Shoot(direction);
             }
         }
 
-        void Shoot()
+        void Shoot(Vector2 direction)
         {
-            Instantiate(ballPrefab, muzzle.position, muzzle.rotation);
+            GameObject obj = Instantiate(ballPrefab, muzzle.position, muzzle.rotation);
+            BallBase ball= obj.GetComponent<BallBase>();
+            ball.SetMoveDirection(direction);
+
+            ball.GetComponent<SpriteRenderer>().color = new Color(Random.Range(0, 255), Random.Range(0, 255), Random.Range(0, 255));
         }
     }
 }
