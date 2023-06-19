@@ -32,5 +32,10 @@ namespace MarbleBall
                 boxList.Add(objects[i].GetComponent<BoxBase>());
             }
         }
+
+        public void BoxDeath(BoxBase box)
+        {
+            boxList.Remove(box);
+        }
     }
 }

@@ -19,12 +19,6 @@ namespace MarbleBall
             ballPrefab = Resources.Load<GameObject>("Prefabs/BlastBall");
         }
 
-        private void Start()
-        {
-
-
-        }
-
         private void Update()
         {
             if (Input.GetMouseButtonDown(0))

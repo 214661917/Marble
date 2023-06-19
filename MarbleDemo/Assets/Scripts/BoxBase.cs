@@ -21,6 +21,7 @@ namespace MarbleBall
 
         void Death()
         {
+            BoxManager.Instance.BoxDeath(this);
             Destroy(gameObject);
         }
     }
