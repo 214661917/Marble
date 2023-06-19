@@ -12,13 +12,6 @@ namespace MarbleBall
 
         public int ballCount = 2;
 
-        private GameObject ballPrefab;
-
-        private void Awake()
-        {
-            ballPrefab = Resources.Load<GameObject>("Prefabs/BlastBall");
-        }
-
         private void Update()
         {
             if (Input.GetMouseButtonDown(0))
@@ -30,8 +23,11 @@ namespace MarbleBall
 
         void Shoot(Vector2 direction)
         {
-            GameObject obj = Instantiate(ballPrefab, muzzle.position, muzzle.rotation);
-            BallBase ball= obj.GetComponent<BallBase>();
+            GameObject ballObj = BallManager.Instance.GetBall(BallType.Blast);
+            ballObj.transform.position = muzzle.position;
+            ballObj.transform.rotation = muzzle.rotation;
+
+            BallBase ball= ballObj.GetComponent<BallBase>();
             ball.SetMoveDirection(direction);
         }
     }
