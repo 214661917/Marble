@@ -10,6 +10,17 @@ namespace MarbleBall
     {
         public int hp = 10;
 
+        void Move()
+        {
+            transform.position -= Vector3.up * Constant.OneGridDistance;
+        }
+
+        void Death()
+        {
+            BoxManager.Instance.BoxDeath(this);
+            Destroy(gameObject);
+        }
+
         public void Hurt(int atk)
         {
             hp -= atk;
@@ -17,12 +28,6 @@ namespace MarbleBall
             {
                 Death();
             }
-        }
-
-        void Death()
-        {
-            BoxManager.Instance.BoxDeath(this);
-            Destroy(gameObject);
         }
     }
 }
