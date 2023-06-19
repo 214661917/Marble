@@ -20,7 +20,6 @@ namespace MarbleBall
 
         public GameObject GetBall(BallType ballType)
         {
-            Debug.Log(ballPrefabs[ballType]);
             if (!ballPrefabs.ContainsKey(ballType) || !ballPrefabs[ballType])
             {
                 return null;

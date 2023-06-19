@@ -16,7 +16,6 @@ namespace MarbleBall
             for (int i = 0; i < boxList.Count; i++)
             {
                 float distance = Vector2.Distance(boxList[i].transform.position, blastPos);
-                Debug.Log(distance);
                 if (distance <= blastRange)
                 {
                     targets.Add(boxList[i]);
