@@ -12,5 +12,13 @@ namespace MarbleBall
         /// 场景中一格的距离
         /// </summary>
         public const float OneGridDistance = 0.9f;
+        /// <summary>
+        /// 场景中格子的列数
+        /// </summary>
+        public const int ColumnCount = 5;
+        /// <summary>
+        /// 场景中格子的行数
+        /// </summary>
+        public const int RowCount = 10;
     }
 }

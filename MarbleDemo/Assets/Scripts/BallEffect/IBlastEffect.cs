@@ -11,14 +11,14 @@ namespace MarbleBall
         public static void Blast(Vector3 blastPos, float blastRange, int blastAtk)
         {
             List<BoxBase> targets = new List<BoxBase>();
-            List<BoxBase> boxList = BoxManager.Instance.BoxList;
+            Dictionary<int, BoxBase> boxDic = BoxManager.Instance.BoxDic;
 
-            for (int i = 0; i < boxList.Count; i++)
+            foreach (var item in boxDic)
             {
-                float distance = Vector2.Distance(boxList[i].transform.position, blastPos);
+                float distance = Vector2.Distance(item.Value.transform.position, blastPos);
                 if (distance <= blastRange)
                 {
-                    targets.Add(boxList[i]);
+                    targets.Add(item.Value);
                 }
             }
 

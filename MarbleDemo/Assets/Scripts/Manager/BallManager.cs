@@ -10,6 +10,14 @@ namespace MarbleBall
     public class BallManager : MonoSingle<BallManager>
     {
         Dictionary<BallType, GameObject> ballPrefabs = new Dictionary<BallType, GameObject>();
+        readonly Dictionary<int, BallBase> ballDic = new Dictionary<int, BallBase>();
+        public Dictionary<int, BallBase> BallDic
+        {
+            get
+            {
+                return ballDic;
+            }
+        }
         private void Awake()
         {
             instance = this;
@@ -18,25 +26,34 @@ namespace MarbleBall
             ballPrefabs.Add(BallType.Blast, Resources.Load<GameObject>("Prefabs/Balls/BlastBall"));
         }
 
-        public GameObject GetBall(BallType ballType)
+        public BallBase GenerateBall(BallType ballType)
         {
             if (!ballPrefabs.ContainsKey(ballType) || !ballPrefabs[ballType])
             {
                 return null;
             }
 
-            GameObject ball = Instantiate(ballPrefabs[ballType]);
+            GameObject ballObj = Instantiate(ballPrefabs[ballType]);
+            BallBase ball;
             switch (ballType)
             {
                 case BallType.Blast:
-                    ball.AddComponent<BlastBall>();
+                    ball = ballObj.AddComponent<BlastBall>();
                     break;
                 default:
-                    ball.AddComponent<BallBase>();
+                    ball = ballObj.AddComponent<BallBase>();
                     break;
             }
 
+            ball.ID = GameManager.Instance.GetAvailableId();
+            ballDic.Add(ball.ID, ball);
+
             return ball;
+        }
+
+        public void RemoveBall(int ballId)
+        {
+            ballDic.Remove(ballId);
         }
     }
 }

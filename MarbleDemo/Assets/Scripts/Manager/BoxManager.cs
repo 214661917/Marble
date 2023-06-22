@@ -9,33 +9,82 @@ namespace MarbleBall
 {
     public class BoxManager : MonoSingle<BoxManager>
     {
-        public List<BoxBase> boxList = new List<BoxBase>();
-        public List<BoxBase> BoxList
+        Dictionary<BoxType, GameObject> boxPrefabs = new Dictionary<BoxType, GameObject>();
+        readonly Dictionary<int, BoxBase> boxDic = new Dictionary<int, BoxBase>();
+        public Dictionary<int, BoxBase> BoxDic
         {
             get
             {
-                return boxList;
+                return boxDic;
             }
         }
+
+        float[] boxColumnPos = new float[] { -1.8f, -0.9f, 0, 0.9f, 1.8f };
+        Transform boxRefreshPoint;
+        int boxId = 0;
 
         private void Awake()
         {
             instance = this;
+
+            boxRefreshPoint = GameObject.Find("BoxRefreshPoint").transform;
+
+            InitPrefab();
         }
 
-        private void Start()
+        private void InitPrefab()
         {
-            //临时写法
-            GameObject[] objects = GameObject.FindGameObjectsWithTag("Box");
-            for (int i = 0; i < objects.Length; i++)
+            boxPrefabs.Add(BoxType.Normal, Resources.Load<GameObject>("Prefabs/Box/Box"));
+        }
+
+        private void MoveAllBox()
+        {
+            foreach (var item in boxDic)
             {
-                boxList.Add(objects[i].GetComponent<BoxBase>());
+                item.Value.Move();
             }
         }
 
-        public void BoxDeath(BoxBase box)
+        private void GenerateRowBox()
         {
-            boxList.Remove(box);
+            for (int i = 0; i < Constant.ColumnCount; i++)
+            {
+                BoxBase box = GenerateBox(BoxType.Normal);
+                box.transform.position = new Vector2(boxColumnPos[i], boxRefreshPoint.position.y);
+            }
+        }
+
+        private BoxBase GenerateBox(BoxType boxType)
+        {
+            if (!boxPrefabs.ContainsKey(boxType) || !boxPrefabs[boxType])
+            {
+                return null;
+            }
+
+            GameObject boxObj = Instantiate(boxPrefabs[boxType]);
+            BoxBase box;
+            switch (boxType)
+            {
+                default:
+                    box = boxObj.AddComponent<BoxBase>();
+                    break;
+            }
+
+            box.ID = GameManager.Instance.GetAvailableId();
+            boxDic.Add(box.ID, box);
+
+            return box;
+        }
+
+        public void RemoveBox(int boxId)
+        {
+            boxDic.Remove(boxId);
+        }
+
+        public void DownMoveBox()
+        {
+            GenerateRowBox();
+            MoveAllBox();
         }
     }
 }

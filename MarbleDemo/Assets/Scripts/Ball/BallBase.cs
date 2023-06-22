@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace MarbleBall
 {
-    public class BallBase : MonoBehaviour
+    public class BallBase : Entity
     {
         public float moveSpeed = 10;
         public int atk = 1;

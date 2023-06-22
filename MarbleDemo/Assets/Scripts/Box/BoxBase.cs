@@ -6,24 +6,53 @@ using UnityEngine;
 
 namespace MarbleBall
 {
-    public class BoxBase : MonoBehaviour
+    public class BoxBase : Entity
     {
-        public int hp = 10;
+        private int hp = 1;
+        public int HP
+        {
+            get
+            {
+                ShowHp();
+                return hp;
+            }
+        }
+        public TextMesh hpText;
 
-        void Move()
+
+
+        private void Awake()
+        {
+            hpText = transform.Find("HPText").GetComponent<TextMesh>();
+        }
+
+        private void OnEnable()
+        {
+            ShowHp();
+        }
+
+        public void Move()
         {
             transform.position -= Vector3.up * Constant.OneGridDistance;
         }
 
-        void Death()
+        private void Death()
         {
-            BoxManager.Instance.BoxDeath(this);
+            BoxManager.Instance.RemoveBox(ID);
             Destroy(gameObject);
+        }
+
+        private void ShowHp()
+        {
+            hpText.text = hp.ToString();
         }
 
         public void Hurt(int atk)
         {
             hp -= atk;
+
+            ShowHp();
+
             if (hp <= 0)
             {
                 Death();
