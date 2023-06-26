@@ -10,7 +10,7 @@ namespace MarbleBall
     {
         private void Awake()
         {
-            EventManager.Instance.Regist(EventKey.TestEvent, TestFunc);
+            //EventManager.Instance.Regist(EventKey.TestEvent, TestFunc);
         }
 
         private void Start()
@@ -19,7 +19,7 @@ namespace MarbleBall
             list.Add("A");
             list.Add("B");
             list.Add("C");
-            EventManager.Instance.TriggerEvent(EventKey.TestEvent, list);
+            //EventManager.Instance.TriggerEvent(EventKey.TestEvent, list);
         }
 
         void TestFunc(params object[] args)
