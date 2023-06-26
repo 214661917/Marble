@@ -19,7 +19,15 @@ namespace MarbleBall
         }
         public TextMesh hpText;
 
+        private int cost = 1;
 
+        public int Cost
+        {
+            get
+            {
+                return cost;
+            }
+        }
 
         private void Awake()
         {
@@ -39,6 +47,7 @@ namespace MarbleBall
         private void Death()
         {
             BoxManager.Instance.RemoveBox(ID);
+            PlayerData.Instance.AddMoney(Cost);
             Destroy(gameObject);
         }
 
