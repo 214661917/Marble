@@ -8,6 +8,7 @@ namespace MarbleBall
 {
     public enum EventKey
     {
-        TestEvent,
+        NextRound,  //游戏下回合
+        RemoveBall, //从场景中移除球
     }
 }

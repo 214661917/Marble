@@ -23,6 +23,13 @@ namespace MarbleBall
         private void Awake()
         {
             instance = this;
+
+            EventManager.Instance.Regist(EventKey.NextRound, NextRound);
+        }
+
+        private void OnDestroy()
+        {
+            EventManager.Instance.UnRegist(EventKey.NextRound, NextRound);
         }
 
         private void Start()
@@ -34,7 +41,7 @@ namespace MarbleBall
          *1.没有球可以发射了
          *2.发射出去的球都销毁了
          */
-        public void NextRound()
+        public void NextRound(params object[] args)
         {
             BoxManager.Instance.DownMoveBox();
             curRoundCount++;

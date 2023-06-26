@@ -13,8 +13,7 @@ namespace MarbleBall
             if (collision.tag == "Ball")
             {
                 BallBase ball = collision.GetComponent<BallBase>();
-                BallManager.Instance.RemoveBall(ball.ID);
-                Destroy(collision.gameObject);
+                EventManager.Instance.TriggerEvent(EventKey.RemoveBall, ball.ID);
             }
         }
     }

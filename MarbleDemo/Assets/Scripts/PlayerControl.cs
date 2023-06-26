@@ -25,9 +25,8 @@ namespace MarbleBall
 
             if (ballCount <= 0 && BallManager.Instance.BallDic.Count == 0)
             {
-                //后续用事件调用
                 //下一回合
-                GameManager.Instance.NextRound();
+                EventManager.Instance.TriggerEvent(EventKey.NextRound);
                 ballCount = 2;
             }
         }
