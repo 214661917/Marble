@@ -11,5 +11,6 @@ namespace MarbleBall
         NextRound,  //游戏下回合
         RemoveBall, //从场景中移除球
         MoneyChange,//钱币数量变更
+        TouchDown,  //触控区按下
     }
 }
