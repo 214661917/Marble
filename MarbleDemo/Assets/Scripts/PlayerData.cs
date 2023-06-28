@@ -19,6 +19,13 @@ namespace MarbleBall
         /// </summary>
         public int ballMaxCount = 0;
 
+        public void ResetData()
+        {
+            money = 0;
+            ballCount = 0;
+            ballMaxCount = 0;
+        }
+
         /// <summary>
         /// 球补满至上限
         /// </summary>

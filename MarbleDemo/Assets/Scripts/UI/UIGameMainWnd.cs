@@ -30,7 +30,7 @@ namespace MarbleBall
         {
             base.OnEnter();
 
-            ShowMoney(0);
+            ShowMoney(PlayerData.Instance.money);
 
             EventManager.Instance.Regist(EventKey.MoneyChange, OnMoneyChange);
         }
