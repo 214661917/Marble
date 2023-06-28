@@ -21,7 +21,6 @@ namespace MarbleBall
 
         float[] boxColumnPos = new float[] { -1.8f, -0.9f, 0, 0.9f, 1.8f };
         Transform boxRefreshPoint;
-        int boxId = 0;
 
         private void Awake()
         {

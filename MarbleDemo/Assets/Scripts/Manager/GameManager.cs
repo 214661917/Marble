@@ -9,15 +9,7 @@ namespace MarbleBall
 {
     public class GameManager : MonoSingle<GameManager>
     {
-        /// <summary>
-        /// 是否回合结束
-        /// </summary>
-        private bool isRoundOver = true;
-        /// <summary>
-        /// 当前回合数
-        /// </summary>
-        private int curRoundCount = 0;
-
+        //可用的实体id 用于Box,Ball
         private int availableId = 0;
 
         private PlayerData playerData;
@@ -73,7 +65,6 @@ namespace MarbleBall
         {
             playerData.ReplenishBall();
             BoxManager.Instance.DownMoveBox();
-            curRoundCount++;
         }
 
         /// <summary>
