@@ -11,24 +11,18 @@ namespace MarbleBall
         public float moveSpeed = 10;
         public int atk = 1;
 
-        public Vector2 moveDir = Vector2.up;
-
-        private Rigidbody2D rigidbody;
+        private Rigidbody2D rb2D;
 
         private void Awake()
         {
-            rigidbody = transform.GetComponent<Rigidbody2D>();
+            rb2D = transform.GetComponent<Rigidbody2D>();
+            rb2D.velocity = Vector2.zero;
+            rb2D.sharedMaterial = new PhysicsMaterial2D() { friction = 0, bounciness = 1f };
         }
 
         protected void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collision.gameObject.tag != "Ball")
-            {
-                Vector2 direction = Vector2.Reflect(moveDir, collision.GetContact(0).normal);
-                SetMoveDirection(direction);
-            }
-            
-            if (collision.gameObject.tag == "Box")
+            if (collision.gameObject.CompareTag("Box"))
             {
                 BoxBase box = collision.gameObject.GetComponent<BoxBase>();
                 box.Hurt(atk);
@@ -36,15 +30,14 @@ namespace MarbleBall
             }
         }
 
-        void Move()
+        private void Move(Vector2 direction)
         {
-            rigidbody.velocity = moveDir.normalized * moveSpeed;
+            rb2D.velocity = direction.normalized * moveSpeed;
         }
 
         public void SetMoveDirection(Vector2 direction)
         {
-            moveDir = direction;
-            Move();
+            Move(direction);
         }
 
         protected virtual void BallSkill()

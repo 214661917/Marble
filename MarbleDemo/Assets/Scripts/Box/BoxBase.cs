@@ -8,7 +8,7 @@ namespace MarbleBall
 {
     public class BoxBase : Entity
     {
-        private int hp = 1;
+        private int hp = 10;
         public int HP
         {
             get
