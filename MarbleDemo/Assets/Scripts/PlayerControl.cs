@@ -10,31 +10,28 @@ namespace MarbleBall
     {
         public Transform muzzle;
 
-        public int ballCount = 2;
+        private PlayerData playerData;
 
         //临时变量
         public BallType ballType = BallType.Blast;
 
         private void Start()
         {
+            playerData = PlayerData.Instance;
+
             EventManager.Instance.Regist(EventKey.TouchDown, OnShoot);
         }
 
-        private void Update()
+        private void OnDisable()
         {
-            if (ballCount <= 0 && BallManager.Instance.BallDic.Count == 0)
-            {
-                //下一回合
-                EventManager.Instance.TriggerEvent(EventKey.NextRound);
-                ballCount = 2;
-            }
+            EventManager.Instance.UnRegist(EventKey.TouchDown, OnShoot);
         }
 
         private void OnShoot(params object[] args)
         {
             Vector2 touchPos = (Vector2)args[0];
 
-            if (ballCount > 0)
+            if (playerData.ballCount > 0)
             {
                 Vector2 direction = Camera.main.ScreenToWorldPoint(touchPos) - muzzle.position;
                 Shoot(direction);
@@ -48,7 +45,7 @@ namespace MarbleBall
             ball.transform.rotation = muzzle.rotation;
             ball.SetMoveDirection(direction);
 
-            ballCount--;
+            playerData.ballCount--;
         }
     }
 }

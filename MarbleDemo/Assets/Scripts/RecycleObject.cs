@@ -10,10 +10,10 @@ namespace MarbleBall
     {
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.tag == "Ball")
+            if (collision.CompareTag("Ball"))
             {
                 BallBase ball = collision.GetComponent<BallBase>();
-                EventManager.Instance.TriggerEvent(EventKey.RemoveBall, ball.ID);
+                BallManager.Instance.RemoveBall(ball.ID);
             }
         }
     }

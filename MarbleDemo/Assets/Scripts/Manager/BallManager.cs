@@ -22,15 +22,8 @@ namespace MarbleBall
         {
             instance = this;
 
-            EventManager.Instance.Regist(EventKey.RemoveBall, RemoveBall);
-
             ballPrefabs.Add(BallType.Normal, Resources.Load<GameObject>("Prefabs/Balls/Ball"));
             ballPrefabs.Add(BallType.Blast, Resources.Load<GameObject>("Prefabs/Balls/BlastBall"));
-        }
-
-        private void OnDestroy()
-        {
-            EventManager.Instance.UnRegist(EventKey.RemoveBall, RemoveBall);
         }
 
         public BallBase GenerateBall(BallType ballType)
@@ -62,12 +55,13 @@ namespace MarbleBall
         /// 球从场景中移除
         /// </summary>
         /// <param name="ballId"></param>
-        public void RemoveBall(params object[] args)
+        public void RemoveBall(int ballId)
         {
-            int ballId = (int)args[0];
             BallBase ball = ballDic[ballId];
             ballDic.Remove(ballId);
             Destroy(ball.gameObject);
+
+            EventManager.Instance.TriggerEvent(EventKey.RemoveBall, ballDic.Count);
         }
     }
 }

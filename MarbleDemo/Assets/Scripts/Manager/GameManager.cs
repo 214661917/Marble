@@ -12,22 +12,21 @@ namespace MarbleBall
         /// <summary>
         /// 是否回合结束
         /// </summary>
-        bool isRoundOver = true;
+        private bool isRoundOver = true;
         /// <summary>
         /// 当前回合数
         /// </summary>
-        int curRoundCount = 0;
+        private int curRoundCount = 0;
 
-        int availableId = 0;
+        private int availableId = 0;
+
+        private PlayerData playerData;
 
         private void Awake()
         {
             instance = this;
-        }
 
-        private void OnDestroy()
-        {
-            EventManager.Instance.UnRegist(EventKey.NextRound, NextRound);
+            playerData = PlayerData.Instance;
         }
 
         private void Start()
@@ -35,17 +34,44 @@ namespace MarbleBall
             //打开游戏主界面
             UIManager.Instance.PushPanel(UIType.UIGameMainWnd);
 
-            EventManager.Instance.Regist(EventKey.NextRound, NextRound);
+            EventManager.Instance.Regist(EventKey.RemoveBall, OnRemoveBall);
+
+            GameInit();
+        }
+
+        private void OnDisable()
+        {
+            EventManager.Instance.UnRegist(EventKey.RemoveBall, OnRemoveBall);
+        }
+
+        private void GameInit()
+        {
+            //临时写法
+            playerData.ballMaxCount = 5;
 
             NextRound();
         }
 
-        /*下一回合的条件
-         *1.没有球可以发射了
-         *2.发射出去的球都销毁了
-         */
+        private void OnRemoveBall(params object[] args)
+        {
+            int ballCount = (int)args[0];
+            int usableBallCount = PlayerData.Instance.ballCount;
+
+            /*下一回合的条件
+             *1.没有球可以发射了
+             *2.发射出去的球都销毁了
+             */
+            if (usableBallCount <= 0 && ballCount == 0)
+            {
+                //下一回合
+                NextRound();
+            }
+        }
+
+
         public void NextRound(params object[] args)
         {
+            playerData.ReplenishBall();
             BoxManager.Instance.DownMoveBox();
             curRoundCount++;
         }
