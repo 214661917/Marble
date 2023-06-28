@@ -63,8 +63,10 @@ namespace MarbleBall
 
                 GameObject panelPrefab = Resources.Load<GameObject>(path);
                 GameObject panelObj = Instantiate(panelPrefab, canvasRoot);
-                panel = panelObj.AddComponent<UIBase>();
+                panel = panelObj.GetComponent<UIBase>();
+
                 panelDic.Add(uiType, panel);
+                panel.OnInit();
             }
 
             return panel;
@@ -89,6 +91,7 @@ namespace MarbleBall
 
             UIBase panel = GetPanel(uiType);
             panelStack.Push(panel);
+            panel.gameObject.SetActive(true);
             panel.OnEnter();
         }
 
@@ -110,6 +113,7 @@ namespace MarbleBall
             //退出栈顶界面
             UIBase topPanel = panelStack.Pop();
             topPanel.OnExit();
+            topPanel.gameObject.SetActive(false);
 
             //恢复上一界面
             if (panelStack.Count > 0)

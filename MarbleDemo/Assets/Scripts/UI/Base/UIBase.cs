@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace MarbleBall
 {
-    public abstract class UIBase : MonoBehaviour
+    public class UIBase : MonoBehaviour
     {
         //UI层级，根据层级设置父节点
         public UILayer uiLayer;
@@ -14,11 +14,20 @@ namespace MarbleBall
         public string uiType;
 
         /// <summary>
+        /// 界面第一次加载时用于初始化
+        /// </summary>
+        public virtual void OnInit()
+        {
+
+        }
+
+        /// <summary>
         /// 界面打开时调用
         /// </summary>
         public virtual void OnEnter()
         {
             //设置父节点
+            transform.SetParent(UIManager.Instance.layerDic[uiLayer]);
         }
 
         /// <summary>

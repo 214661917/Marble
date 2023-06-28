@@ -23,8 +23,6 @@ namespace MarbleBall
         private void Awake()
         {
             instance = this;
-
-            EventManager.Instance.Regist(EventKey.NextRound, NextRound);
         }
 
         private void OnDestroy()
@@ -34,6 +32,11 @@ namespace MarbleBall
 
         private void Start()
         {
+            //打开游戏主界面
+            UIManager.Instance.PushPanel(UIType.UIGameMainWnd);
+
+            EventManager.Instance.Regist(EventKey.NextRound, NextRound);
+
             NextRound();
         }
 

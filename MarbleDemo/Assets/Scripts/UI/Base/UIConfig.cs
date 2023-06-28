@@ -13,7 +13,10 @@ namespace MarbleBall
         /// </summary>
         void InitPath()
         {
+            pathDic = new Dictionary<string, string>();
 
+            pathDic.Add(UIType.UIGameMainWnd, "Prefabs/UI/UIGameMainWnd");
+            pathDic.Add(UIType.UIShopWnd, "Prefabs/UI/UIShopWnd");
         }
 
         /// <summary>

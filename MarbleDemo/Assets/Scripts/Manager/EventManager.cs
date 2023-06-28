@@ -7,11 +7,16 @@ using MarbleBall.Common;
 
 namespace MarbleBall
 {
-    public class EventManager : MonoAutoSingle<EventManager>
+    public class EventManager : MonoSingle<EventManager>
     {
         //执行事件，参数为对象列表
         public delegate void EventDelegate(object[] args);
         Dictionary<EventKey, Dictionary<int, EventDelegate>> eventListeners = new Dictionary<EventKey, Dictionary<int, EventDelegate>>();
+
+        private void Awake()
+        {
+            instance = this;
+        }
 
         /// <summary>
         /// 订阅事件
