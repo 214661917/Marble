@@ -8,27 +8,36 @@ namespace MarbleBall
 {
     public class Test : MonoBehaviour
     {
-        private void Awake()
-        {
-            //EventManager.Instance.Regist(EventKey.TestEvent, TestFunc);
-        }
-
         private void Start()
         {
-            List<string> list = new List<string>();
-            list.Add("A");
-            list.Add("B");
-            list.Add("C");
-            //EventManager.Instance.TriggerEvent(EventKey.TestEvent, list);
-        }
+            BallData ball1 = new BallData(1, BallType.Normal, 1);
+            BallData ball2 = new BallData(2, BallType.Blast, 1);
+            BallData ball3 = new BallData(3, BallType.Blast, 2);
 
-        void TestFunc(params object[] args)
-        {
-            List<string> list = (List<string>)args[0];
-            for (int i = 0; i < list.Count; i++)
+            Debug.Log(BallBagData.Instance.AddBall(ball1));
+            Debug.Log(BallBagData.Instance.AddBall(ball2));
+            Debug.Log(BallBagData.Instance.AddBall(ball3));
+
+            BallBagData.Instance.RemoveBallLeisure(1);
+
+            BallBagData.Instance.MoveBallToBattle(2, 4);
+
+            for (int i = 0; i < Constant.LeisureBallCount; i++)
             {
-                Debug.Log(string.Format("触发事件{0}", list[i]));
+                if (BallBagData.Instance.LeisureBallDic.ContainsKey(i))
+                {
+                    Debug.Log(string.Format("备战席 第{0}个ID：{1}", i, BallBagData.Instance.LeisureBallDic[i].id));
+                }
+            }
+
+            for (int i = 0; i < Constant.BattleBallCount; i++)
+            {
+                if (BallBagData.Instance.BattleBallDic.ContainsKey(i))
+                {
+                    Debug.Log(string.Format("出战席 第{0}个ID：{1}", i, BallBagData.Instance.BattleBallDic[i].id));
+                }
             }
         }
+
     }
 }

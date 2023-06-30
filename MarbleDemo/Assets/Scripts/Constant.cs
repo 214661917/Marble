@@ -20,5 +20,13 @@ namespace MarbleBall
         /// 场景中格子的行数
         /// </summary>
         public const int RowCount = 10;
+        /// <summary>
+        /// 备战席容量
+        /// </summary>
+        public const int LeisureBallCount = 10;
+        /// <summary>
+        /// 出战席容量
+        /// </summary>
+        public const int BattleBallCount = 5;
     }
 }
