@@ -8,10 +8,24 @@ namespace MarbleBall
 {
     public class BallBase : Entity
     {
-        public float moveSpeed = 10;
-        public int atk = 1;
+        public float moveSpeed;
+        public int atk;
+
+        private BallData ballData;
 
         private Rigidbody2D rb2D;
+
+        public void SetBallData(BallData ballData)
+        {
+            this.ballData = ballData;
+            Init();
+        }
+
+        protected virtual void Init()
+        {
+            moveSpeed = ballData.moveSpeed;
+            atk = ballData.atk;
+        }
 
         private void Awake()
         {

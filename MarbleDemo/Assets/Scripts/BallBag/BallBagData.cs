@@ -33,7 +33,7 @@ namespace MarbleBall
         public bool AddBall(BallData ball)
         {
             //先尝试添加至备战席，如果已满测尝试添加至出战席
-            return AddBallToLeisure(ball);// || AddBallToBattle(ball);
+            return AddBallToLeisure(ball) || AddBallToBattle(ball);
         }
 
         /// <summary>
@@ -67,13 +67,26 @@ namespace MarbleBall
         //添加球至备战席
         public bool AddBallToLeisure(BallData ball)
         {
-            return AddBallToDic(ball, leisureBallDic, Constant.LeisureBallCount);
+            if (AddBallToDic(ball, leisureBallDic, Constant.LeisureBallCount))
+            {
+                EventManager.Instance.TriggerEvent(EventKey.LeisureBagChange);
+                PlayerData.Instance.ballMaxCount = leisureBallDic.Count;
+                return true;
+            }
+
+            return false;
         }
 
         //添加球至出战席
         public bool AddBallToBattle(BallData ball)
         {
-            return AddBallToDic(ball, battleBallDic, Constant.BattleBallCount);
+            if (AddBallToDic(ball, battleBallDic, Constant.BattleBallCount))
+            {
+                EventManager.Instance.TriggerEvent(EventKey.BattleBagChange);
+                return true;
+            }
+
+            return false;
         }
 
         /// <summary>
@@ -96,6 +109,8 @@ namespace MarbleBall
         public void RemoveBallLeisure(int index)
         {
             RemoveBall(leisureBallDic, index);
+            EventManager.Instance.TriggerEvent(EventKey.LeisureBagChange);
+            PlayerData.Instance.ballMaxCount = leisureBallDic.Count;
         }
 
         /// <summary>
@@ -105,6 +120,7 @@ namespace MarbleBall
         public void RemoveBallBattle(int index)
         {
             RemoveBall(battleBallDic, index);
+            EventManager.Instance.TriggerEvent(EventKey.BattleBagChange);
         }
 
         /// <summary>
@@ -148,6 +164,8 @@ namespace MarbleBall
         public void MoveBallToLeisure(int fromIndex, int toIndex)
         {
             MoveBall(battleBallDic, fromIndex, leisureBallDic, toIndex);
+            EventManager.Instance.TriggerEvent(EventKey.LeisureBagChange);
+            PlayerData.Instance.ballMaxCount = leisureBallDic.Count;
         }
 
         /// <summary>
@@ -158,6 +176,7 @@ namespace MarbleBall
         public void MoveBallToBattle(int fromIndex, int toIndex)
         {
             MoveBall(leisureBallDic, fromIndex, battleBallDic, toIndex);
+            EventManager.Instance.TriggerEvent(EventKey.BattleBagChange);
         }
 
         //合成球 如：俩个一星合成一个二星

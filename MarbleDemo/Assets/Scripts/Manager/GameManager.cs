@@ -38,9 +38,6 @@ namespace MarbleBall
 
         private void GameInit()
         {
-            //临时写法
-            playerData.ballMaxCount = 5;
-
             NextRound();
         }
 
@@ -65,6 +62,7 @@ namespace MarbleBall
         {
             playerData.ReplenishBall();
             BoxManager.Instance.DownMoveBox();
+            EventManager.Instance.TriggerEvent(EventKey.NextRound);
         }
 
         /// <summary>

@@ -10,17 +10,17 @@ namespace MarbleBall
     {
         private void Start()
         {
-            BallData ball1 = new BallData(1, BallType.Normal, 1);
-            BallData ball2 = new BallData(2, BallType.Blast, 1);
-            BallData ball3 = new BallData(3, BallType.Blast, 2);
+            BallData ball1 = new BallData(1, BallType.Normal, 5, 10);
+            BallData ball2 = new BallData(2, BallType.Blast, 5, 10);
+            BallData ball3 = new BallData(3, BallType.Blast, 10, 10);
 
             Debug.Log(BallBagData.Instance.AddBall(ball1));
             Debug.Log(BallBagData.Instance.AddBall(ball2));
             Debug.Log(BallBagData.Instance.AddBall(ball3));
 
-            BallBagData.Instance.RemoveBallLeisure(1);
-
-            BallBagData.Instance.MoveBallToBattle(2, 4);
+            BallBagData.Instance.MoveBallToBattle(0, 0);
+            BallBagData.Instance.MoveBallToBattle(1, 1);
+            BallBagData.Instance.MoveBallToBattle(2, 2);
 
             for (int i = 0; i < Constant.LeisureBallCount; i++)
             {

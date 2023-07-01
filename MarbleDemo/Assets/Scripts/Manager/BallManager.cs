@@ -26,8 +26,10 @@ namespace MarbleBall
             ballPrefabs.Add(BallType.Blast, Resources.Load<GameObject>("Prefabs/Balls/BlastBall"));
         }
 
-        public BallBase GenerateBall(BallType ballType)
+        public BallBase GenerateBall(BallData ballData)
         {
+            BallType ballType = ballData.type;
+
             if (!ballPrefabs.ContainsKey(ballType) || !ballPrefabs[ballType])
             {
                 return null;
@@ -45,6 +47,7 @@ namespace MarbleBall
                     break;
             }
 
+            ball.SetBallData(ballData);
             ball.ID = GameManager.Instance.GetAvailableId();
             ballDic.Add(ball.ID, ball);
 
