@@ -14,5 +14,7 @@ namespace MarbleBall
         TouchDown,          //触控区按下
         BattleBagChange,    //出战席改变
         LeisureBagChange,   //备战席改变
+        GameOver,           //游戏结束
+        BoxCross,           //箱子越界
     }
 }

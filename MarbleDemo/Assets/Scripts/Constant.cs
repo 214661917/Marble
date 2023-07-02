@@ -15,11 +15,11 @@ namespace MarbleBall
         /// <summary>
         /// 场景中格子的列数
         /// </summary>
-        public const int ColumnCount = 5;
+        public const int ColumnMaxCount = 5;
         /// <summary>
         /// 场景中格子的行数
         /// </summary>
-        public const int RowCount = 10;
+        public const int RowMaxCount = 7;
         /// <summary>
         /// 备战席容量
         /// </summary>

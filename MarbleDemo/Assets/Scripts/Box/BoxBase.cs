@@ -20,6 +20,8 @@ namespace MarbleBall
         public TextMesh hpText;
 
         private int cost = 1;
+        //箱子的位置层数 从上往下0-n
+        private int boxLayer = 0;
 
         public int Cost
         {
@@ -39,9 +41,20 @@ namespace MarbleBall
             ShowHp();
         }
 
+        private void OnDisable()
+        {
+            
+        }
+
         public void Move()
         {
             transform.position -= Vector3.up * Constant.OneGridDistance;
+
+            //箱子超过边界
+            if (++boxLayer > Constant.RowMaxCount)
+            {
+                EventManager.Instance.TriggerEvent(EventKey.BoxCross);
+            }
         }
 
         private void Death()

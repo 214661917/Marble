@@ -92,10 +92,10 @@ namespace MarbleBall
                 }
             }
 
-            for (int i = 0; i < ballDatas.Count; i++)
-            {
-                Debug.Log(string.Format("第{0}个ID:{1}", i, ballDatas[i].id));
-            }
+            //for (int i = 0; i < ballDatas.Count; i++)
+            //{
+            //    Debug.Log(string.Format("第{0}个ID:{1}", i, ballDatas[i].id));
+            //}
         }
     }
 }

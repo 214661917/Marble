@@ -46,7 +46,7 @@ namespace MarbleBall
 
         private void GenerateRowBox()
         {
-            for (int i = 0; i < Constant.ColumnCount; i++)
+            for (int i = 0; i < Constant.ColumnMaxCount; i++)
             {
                 BoxBase box = GenerateBox(BoxType.Normal);
                 box.transform.position = new Vector2(boxColumnPos[i], boxRefreshPoint.position.y);

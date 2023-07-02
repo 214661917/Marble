@@ -17,6 +17,7 @@ namespace MarbleBall
 
             pathDic.Add(UIType.UIGameMainWnd, "Prefabs/UI/UIGameMainWnd");
             pathDic.Add(UIType.UIShopWnd, "Prefabs/UI/UIShopWnd");
+            pathDic.Add(UIType.UIGameOverWnd, "Prefabs/UI/UIGameOverWnd");
         }
 
         /// <summary>
