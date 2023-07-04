@@ -123,9 +123,9 @@ namespace MarbleBall
         //测试代码
         private void TestAddBall()
         {
-            BallData ball1 = new BallData(1, BallType.Normal, 5, 10);
-            BallData ball2 = new BallData(2, BallType.Blast, 5, 10);
-            BallData ball3 = new BallData(3, BallType.Blast, 10, 10);
+            BallData ball1 = new BallData(1, BallType.Normal, 5, 10, 1);
+            BallData ball2 = new BallData(2, BallType.Blast, 5, 10, 2);
+            BallData ball3 = new BallData(3, BallType.Blast, 10, 10, 3);
 
             Debug.Log(BallBag.Instance.AddBall(ball1));
             //Debug.Log(BallBagData.Instance.AddBall(ball2));
