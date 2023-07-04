@@ -16,5 +16,7 @@ namespace MarbleBall
         LeisureBagChange,   //备战席改变
         GameOver,           //游戏结束
         BoxCross,           //箱子越界
+        BuyBall,            //购买球
+        SellBall,           //出售球
     }
 }

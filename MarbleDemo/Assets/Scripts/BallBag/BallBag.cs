@@ -7,7 +7,7 @@ using MarbleBall.Common;
 
 namespace MarbleBall
 {
-    public class BallBagData : Single<BallBagData>
+    public class BallBag : Single<BallBag>
     {
         //备战席 key:在容器中的位置索引
         private readonly Dictionary<int, BallData> leisureBallDic = new Dictionary<int, BallData>();
@@ -27,6 +27,14 @@ namespace MarbleBall
             {
                 return battleBallDic;
             }
+        }
+
+        public void Init()
+        {
+        }
+
+        public void UnInit()
+        {
         }
 
         //获得球 返回是否添加成功
@@ -183,6 +191,12 @@ namespace MarbleBall
         private void Compound()
         {
 
+        }
+
+        private void OnBuyBall(params object[] args)
+        {
+            BallData ball = (BallData)args[0];
+            AddBall(ball);
         }
     }
 }

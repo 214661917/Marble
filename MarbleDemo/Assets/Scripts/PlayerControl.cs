@@ -14,7 +14,7 @@ namespace MarbleBall
         private int curBallIndex = 0;
 
         private PlayerData playerData;
-        private BallBagData bagData;
+        private BallBag bagData;
 
         //临时变量
         public BallType ballType = BallType.Blast;
@@ -22,7 +22,7 @@ namespace MarbleBall
         private void Start()
         {
             playerData = PlayerData.Instance;
-            bagData = BallBagData.Instance;
+            bagData = BallBag.Instance;
 
             EventManager.Instance.Regist(EventKey.TouchDown, OnShoot);
             EventManager.Instance.Regist(EventKey.BattleBagChange, GetBallList);
