@@ -19,6 +19,8 @@ namespace MarbleBall
             }
         }
 
+        int minBoxHp = 5;
+        int maxBoxHp = 10;
         float[] boxColumnPos = new float[] { -1.8f, -0.9f, 0, 0.9f, 1.8f };
         Transform boxRefreshPoint;
 
@@ -69,6 +71,8 @@ namespace MarbleBall
                     break;
             }
 
+            int addHp = GameManager.Instance.RoundCount - 1;
+            box.HP = Random.Range(minBoxHp + addHp, maxBoxHp + addHp);
             box.ID = GameManager.Instance.GetAvailableId();
             boxDic.Add(box.ID, box);
 

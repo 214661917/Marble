@@ -22,6 +22,15 @@ namespace MarbleBall
                 return isGameOver;
             }
         }
+
+        private int roundCount = 0;
+        public int RoundCount
+        {
+            get
+            {
+                return roundCount;
+            }
+        }
         private void Awake()
         {
             instance = this;
@@ -55,7 +64,7 @@ namespace MarbleBall
             BallBag.Instance.Init();
             BallShop.Instance.Init();
 
-            //TestAddBall();
+            TestAddBall();
             NextRound();
         }
 
@@ -82,6 +91,8 @@ namespace MarbleBall
 
         public void NextRound()
         {
+            roundCount++;
+
             playerData.ReplenishBall();
             BallShop.Instance.Refresh();
             BoxManager.Instance.DownMoveBox();

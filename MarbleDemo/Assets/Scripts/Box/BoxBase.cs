@@ -16,6 +16,11 @@ namespace MarbleBall
                 ShowHp();
                 return hp;
             }
+            set
+            {
+                hp = value;
+                ShowHp();
+            }
         }
         public TextMesh hpText;
 
@@ -34,16 +39,6 @@ namespace MarbleBall
         private void Awake()
         {
             hpText = transform.Find("HPText").GetComponent<TextMesh>();
-        }
-
-        private void OnEnable()
-        {
-            ShowHp();
-        }
-
-        private void OnDisable()
-        {
-            
         }
 
         public void Move()
