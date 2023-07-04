@@ -11,7 +11,9 @@ namespace MarbleBall
     {
         public Text moneyText;
         public Button shopButton;
+        public Button bagButton;
         public Text shopButtonText;
+        public Text bagButtonText;
         public GameObject uiShopWnd;
 
         public override void OnInit()
@@ -24,6 +26,14 @@ namespace MarbleBall
             });
             shopButtonText = transform.Find("ShopButton/Text").GetComponent<Text>();
             shopButtonText.text = "商店";
+
+            bagButton = transform.Find("BagButton").GetComponent<Button>();
+            bagButton.onClick.AddListener(() => {
+                //显示商店界面
+                UIManager.Instance.PushPanel(UIType.UIBagWnd);
+            });
+            bagButtonText = transform.Find("BagButton/Text").GetComponent<Text>();
+            bagButtonText.text = "背包";
         }
 
         public override void OnEnter()

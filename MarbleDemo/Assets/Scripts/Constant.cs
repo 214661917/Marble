@@ -27,7 +27,7 @@ namespace MarbleBall
         /// <summary>
         /// 出战席容量
         /// </summary>
-        public const int BattleBallCount = 5;
+        public const int BattleBallCount = 10;
         /// <summary>
         /// 商店每次刷新出售球的数量
         /// </summary>

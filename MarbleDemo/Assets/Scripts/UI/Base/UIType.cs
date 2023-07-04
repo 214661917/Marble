@@ -12,5 +12,6 @@ namespace MarbleBall
         public const string UIGameMainWnd = "UIGameMainWnd";
         public const string UIShopWnd = "UIShopWnd";
         public const string UIGameOverWnd = "UIGameOverWnd";
+        public const string UIBagWnd = "UIBagWnd";
     }
 }

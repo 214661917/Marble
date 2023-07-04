@@ -8,6 +8,11 @@ namespace MarbleBall
 {
     public class Test : MonoBehaviour
     {
+        private void Start()
+        {
+            PlayerData.Instance.AddMoney(100);
+        }
+
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Space))
