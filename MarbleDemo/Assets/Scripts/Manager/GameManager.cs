@@ -128,11 +128,11 @@ namespace MarbleBall
             BallData ball3 = new BallData(3, BallType.Blast, 10, 10, 3);
 
             Debug.Log(BallBag.Instance.AddBall(ball1));
-            //Debug.Log(BallBagData.Instance.AddBall(ball2));
-            //Debug.Log(BallBagData.Instance.AddBall(ball3));
+            Debug.Log(BallBag.Instance.AddBall(ball2));
+            //Debug.Log(BallBag.Instance.AddBall(ball3));
 
             BallBag.Instance.MoveBallToBattle(0, 0);
-            //BallBagData.Instance.MoveBallToBattle(1, 1);
+            BallBag.Instance.MoveBallToBattle(1, 1);
             //BallBagData.Instance.MoveBallToBattle(2, 2);
 
             for (int i = 0; i < Constant.LeisureBallCount; i++)
